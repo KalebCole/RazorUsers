@@ -1,0 +1,97 @@
+﻿@page "{searchString?}"
+@model UI.Pages.Items.IndexModel
+
+@{
+	ViewData["Title"] = "Items";
+}
+
+<h1>Index</h1>
+
+<p>
+	<a asp-page="Create" class="btn btn-primary btn-sm"> 
+		<i class="bi bi-plus-circle-fill"></i> Create New
+		</a>
+</p>
+<!-- Search bar-->
+<form method="get">
+	<div class="form-group">
+		<div class="input-group">
+			<input class="form-control" type="text" name="searchString" value="@Model.SearchString" />
+			<div class="input-group-append">
+				<button class="btn btn-outline-secondary" type="submit">Search</button>
+			</div>
+		</div>
+	</div>
+</form>
+<!-- Price range filter-->
+<form method="get">
+	<div class="form-group">
+		<div class="input-group">
+			<div class="input-group-prepend">
+				<span class="input-group-text">$</span>
+			</div>
+			<input class="form-control" type="text" name="ItemPriceMin" value="@Model.ItemPriceMin" placeholder="Min" />
+			<div class="input-group-prepend">
+				<span class="input-group-text">$</span>
+			</div>
+			<input class="form-control" type="text" name="ItemPriceMax" value="@Model.ItemPriceMax" placeholder="Max" />
+			<div class="input-group-append">
+				<button class="btn btn-outline-secondary" type="submit">Go</button>
+			</div>
+		</div>
+	</div>
+</form>
+
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.ItemModel[0].ImageURL)
+			</th>
+			<th>
+				<!-- HTML helper tage that is dependent on the name in our model-->
+				@Html.DisplayNameFor(model => model.ItemModel[0].Name)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ItemModel[0].Description)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ItemModel[0].Price)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.ItemModel)
+		{
+			<tr>
+				<td>
+					@if (!string.IsNullOrEmpty(@item.ImageURL))
+					{
+						<img src="@item.ImageURL" class="card-img" style="height: 25px; width: auto" />
+					}
+					else
+					{
+						<img src="~/assets/PlaceHolder.png" class="card-img" style="height: 25px; width: auto"/>
+					}
+
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Description)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Price)
+				</td>
+				<td>
+					<a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-primary" style="color:white;"><i class="bi bi-pencil-square"></i></a>
+					<a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-primary"  style="color:white;"><i class="bi bi-info-circle"></i></a>
+					<a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger" style="color:white;"><i class="bi bi-trash"></i></a>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

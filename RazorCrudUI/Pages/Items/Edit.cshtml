@@ -32,7 +32,10 @@
 
             <div class="form-group">
                 <label asp-for="ItemModel.ImageURL" class="control-label"></label>
-                <input type="file" asp-for="ItemModel.ImageURL" class="form-control" />
+                 <!-- This basically makes it read only. Without it, it will update the even if we don't update-->
+                <input type="file" name="ThisIsNotInTheItemModel" class="form-control" />
+                <input type="hidden" asp-for="ItemModel.ImageURL" />
+                <!--<input type="file" asp-for="ItemModel.ImageURL" class="form-control" />-->
                 <span asp-validation-for="ItemModel.ImageURL" class="text-danger"></span>
             </div>
 

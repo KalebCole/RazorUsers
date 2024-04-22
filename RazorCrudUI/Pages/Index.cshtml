@@ -19,8 +19,15 @@
     {
         <div class="col-md-3 mb-4">
             <div class="card">
-                <div class="card-header">
-                    <h3>@item.Name</h3>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8">
+                            <h6>@item.Name</h6>
+                        </div>
+                        <div class="col-4 text-end">
+                            <p>$ @item.Price</p>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="card-body">
@@ -35,7 +42,6 @@
                 </div>
                 <div class="card-body">
                     <p>@item.Description</p>
-                    <p>@item.Price</p>
                 </div>
                 <div class="card-body">
                     <a asp-page="Details" asp-route-id="@item.Id" class="btn btn-primary">View Details</a>
